@@ -1,0 +1,8 @@
+{
+  "name": "vidga-curtain-carriage-dock",
+  "version": "1.0.0",
+  "dependencies": { "core": "*", "radio": "*" },
+  "files": ["main.ts"],
+  "supportedTargets": ["calliopemini"],
+  "preferredEditor": "tsprj"
+}

@@ -1,0 +1,8 @@
+{
+  "name": "vidga-curtain-motor-pin-test",
+  "version": "1.0.0",
+  "dependencies": { "core": "*", "radio": "*" },
+  "files": ["main.ts"],
+  "supportedTargets": ["calliopemini"],
+  "preferredEditor": "tsprj"
+}

@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LEGO Curtain Carriage – 3D</title>
+<style>
+:root{--bg:#EEF0F2;--panel:#fff;--ink:#1C232B;--muted:#5B6672;--line:#D5DAE0;--accent:#534AB7;--stage:#E3E7EB}
+@media (prefers-color-scheme:dark){:root{--bg:#12161B;--panel:#1A2027;--ink:#E6EAEE;--muted:#9AA5B1;--line:#2C343D;--accent:#AFA9EC;--stage:#0E1216}}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 system-ui,-apple-system,"Segoe UI",Arial,sans-serif}
+.wrap{max-width:1200px;margin:0 auto;padding:20px 16px;display:grid;gap:14px}
+h1{margin:0;font-size:1.5rem}
+.main{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:14px}
+@media (max-width:820px){.main{grid-template-columns:minmax(0,1fr)}}
+.stage{position:relative;background:var(--stage);border:1px solid var(--line);border-radius:10px;overflow:hidden;aspect-ratio:4/3}
+canvas{display:block;width:100%;height:100%;touch-action:none}
+.hint{position:absolute;left:10px;bottom:8px;font-size:12px;color:var(--muted)}
+aside{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:14px}
+ul{list-style:none;margin:0;padding:0;display:grid;gap:4px}
+label{display:flex;gap:8px;align-items:center;font-size:14px;cursor:pointer}
+.sw{width:12px;height:12px;border-radius:3px;flex:none}
+.bar{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+button{font:inherit;font-size:14px;padding:5px 12px;border-radius:6px;border:1px solid var(--line);background:var(--panel);color:var(--ink);cursor:pointer}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>LEGO curtain carriage</h1>
+  <div class="main">
+    <div style="display:grid;gap:8px;min-width:0">
+      <div class="stage"><canvas id="cv" aria-label="3D model of the LEGO curtain carriage"></canvas>
+        <div class="hint">Drag to rotate · scroll to zoom · right-drag to pan</div></div>
+      <div class="bar">
+        <button data-v="iso">3D</button><button data-v="end">Along the rail</button>
+        <button data-v="side">From the room</button><button data-v="below">From below</button>
+      </div>
+    </div>
+    <aside><strong>Parts</strong><ul id="parts" style="margin-top:8px"></ul></aside>
+  </div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+<script>
+const DATA = __DATA__;
+const cv = document.getElementById('cv');
+const renderer = new THREE.WebGLRenderer({canvas: cv, antialias: true});
+renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(getComputedStyle(document.documentElement).getPropertyValue('--stage').trim());
+const camera = new THREE.PerspectiveCamera(32, 4 / 3, 1, 3000);
+const controls = new THREE.OrbitControls(camera, cv);
+controls.enableDamping = true;
+scene.add(new THREE.HemisphereLight(0xffffff, 0x667788, 0.8));
+const sun = new THREE.DirectionalLight(0xffffff, 0.7); sun.position.set(150, -120, -250); scene.add(sun);
+const fill = new THREE.DirectionalLight(0xffffff, 0.35); fill.position.set(-200, 200, 100); scene.add(fill);
+const root = new THREE.Group(); root.rotation.x = -Math.PI / 2; scene.add(root);
+const b64 = (s, T) => { const b = atob(s), u = new Uint8Array(b.length); for (let i = 0; i < b.length; i++) u[i] = b.charCodeAt(i); return new T(u.buffer); };
+const list = document.getElementById('parts');
+DATA.forEach(o => {
+  let g = new THREE.BufferGeometry();
+  g.setAttribute('position', new THREE.BufferAttribute(b64(o.v, Float32Array), 3));
+  g.setIndex(new THREE.BufferAttribute(b64(o.f, Uint32Array), 1));
+  const edges = new THREE.EdgesGeometry(g, 30);
+  g = g.toNonIndexed(); g.computeVertexNormals();
+  const grp = new THREE.Group();
+  grp.add(new THREE.Mesh(g, new THREE.MeshStandardMaterial({color: o.color, roughness: 0.45, metalness: 0.05,
+    transparent: o.opacity < 1, opacity: o.opacity, depthWrite: o.opacity >= 1, side: THREE.DoubleSide})));
+  if (o.opacity >= 1) grp.add(new THREE.LineSegments(edges, new THREE.LineBasicMaterial({color: 0x000000, transparent: true, opacity: 0.22})));
+  root.add(grp);
+  const li = document.createElement('li');
+  li.innerHTML = `<label><input type="checkbox" checked><span class="sw" style="background:${o.color}"></span>${o.label}</label>`;
+  li.querySelector('input').onchange = e => grp.visible = e.target.checked;
+  list.appendChild(li);
+});
+const views = {iso: [170, 60, -230], end: [280, -30, -0.01], side: [0.01, -30, -300], below: [60, -280, -80]};
+function setView(k) { camera.position.set(...views[k]); controls.target.set(10, -25, 0); controls.update(); }
+document.querySelectorAll('[data-v]').forEach(b => b.onclick = () => setView(b.dataset.v));
+setView('iso');
+function resize() { const w = cv.clientWidth, h = cv.clientHeight; renderer.setSize(w, h, false); camera.aspect = w / h; camera.updateProjectionMatrix(); }
+new ResizeObserver(resize).observe(cv); resize();
+(function loop() { controls.update(); renderer.render(scene, camera); requestAnimationFrame(loop); })();
+</script>
+</body>
+</html>
