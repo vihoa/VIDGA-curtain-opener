@@ -18,13 +18,13 @@ Interactive model: [`lego-model.html`](lego-model.html) (download and open in a 
 4. One zip tie around the **round motor body** through the spine hole 24 mm from the centre – never around the gearbox (the wheels sit right beside it).
 5. Turn each wheel by hand: nothing may touch it.
 
-## 3. Gliders and springs (4 corners)
+## 3. Gliders and springs
 
-1. Remove the rail end cap and slide **two wheeled gliders into track 1 and two into track 3**.
-2. In each cross brick, thread a small zip tie through the hole **12 mm from the middle** (both sides) and close it to a ~5 mm loop above the studs.
-3. Hook each spring's top loop into a glider's triangular loop and the bottom loop into the zip-tie loop straight below it.
-4. **Make all four loops the same length.** Smaller loop = more pull. The wheels should grip, but the carriage must still roll when pushed by hand.
-5. Hang the curtain's leading hook on one of the track-1 gliders.
+1. Remove the rail end cap and slide **one wheeled glider into track 1** and **one into track 3**.
+2. Thread a small zip tie through the cross-brick hole **12 mm from the middle**, under each glider (track 1 side at one end, track 3 side at the other), and close it to a ~5 mm loop above the studs.
+3. Hook each spring's top loop into a glider's triangular loop and the bottom loop into the zip-tie loop straight below it. Move the carriage until each hole is directly below its glider.
+4. **Make both loops the same length.** Smaller loop = more pull. The wheels should grip, but the carriage must still roll when pushed by hand.
+5. Hang the curtain's leading hook on the track-1 glider's loop, beside the spring.
 
 ## 4. Electronics
 

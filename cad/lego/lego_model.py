@@ -67,7 +67,7 @@ faces = ((WHEEL_IN, WHEEL_OUT), (-WHEEL_OUT, -WHEEL_IN))
 tyres = U([cy(WHEEL_D / 2, a, b, z=MOTOR_Z) - cy(10, a - 1, b + 1, z=MOTOR_Z) for a, b in faces])
 rims = U([cy(10, a, b, z=MOTOR_Z) - cy(1.5, a - 1, b + 1, z=MOTOR_Z) for a, b in faces])
 
-# Wheeled VIDGA-size gliders (simplified) – one at each corner, tracks 1 and 3
+# Wheeled VIDGA-size gliders (simplified) – one in track 1 at one end, one in track 3 at the other end
 def glider(x, y):
     g = U([cy(3.5, y - 6, y - 3.4, x=x + s * 4, z=3.5) + cy(3.5, y + 3.4, y + 6, x=x + s * 4, z=3.5) for s in (1, -1)])
     g = g + box(x - 7.3, x + 7.3, y - 3.2, y + 3.2, 1.2, 8) + box(x - 3, x + 3, y - 2.5, y + 2.5, -1.1, 1.2)
@@ -75,7 +75,7 @@ def glider(x, y):
     outer = CrossSection([[(-6.2, -2.1), (0, -9.4), (6.2, -2.1)]])
     inner = CrossSection([[(-3.6, -2.1), (0, -6.0), (3.6, -2.1)]])
     return g + (outer - inner).extrude(1.6).rotate([90, 0, 0]).translate([x, y + 0.8, 0])
-corners = [(sx * GLIDER_X, sy * P) for sx in (1, -1) for sy in (1, -1)]
+corners = [(GLIDER_X, P), (-GLIDER_X, -P)]   # two gliders, diagonally opposite
 gliders = U([glider(x, y) for x, y in corners])
 
 # Extension springs: glider loop tip → cross-brick hole 12 mm from the middle
@@ -111,8 +111,8 @@ OBJECTS = [
     ("motor", "Worm motor, double shaft", motor, "#3A3A3A", 1),
     ("tyres", "Ø34 rubber wheels", tyres, "#1B1B1B", 1),
     ("rims", "Wheel rims", rims, "#E8E8E8", 1),
-    ("gliders", "4 wheeled gliders (tracks 1 and 3)", gliders, "#D9D9D9", 1),
-    ("springs", "4 extension springs", springs, "#9AA0A6", 1),
+    ("gliders", "2 wheeled gliders (track 1 and track 3)", gliders, "#D9D9D9", 1),
+    ("springs", "2 extension springs", springs, "#9AA0A6", 1),
     ("calliope", "Calliope mini 1.3 (window side)", calliope, "#2A9D8F", 1),
     ("leds", "LED matrix / light sensor", leds, "#FF3B30", 1),
     ("aaa", "2×AAA NiMH holder (room side)", aaa, "#222222", 1),

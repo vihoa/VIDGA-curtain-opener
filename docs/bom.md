@@ -8,8 +8,8 @@ Prices are rough German shop prices (2026) and change often. Shops are examples,
 |---|---|---|---|
 | Worm-gear motor | N20 size, **double output shaft**, **3 V**, 40–60 rpm (lower rpm = more force) | 1 | eBay.de / AliExpress, search "N20 Schneckengetriebemotor Doppelwelle 3V" |
 | Wheels | Rubber, Ø34 mm, 3 mm D-hole for N20 | 2 | roboter-bausatz.de "4x Rad mit Gummi Reifen für N20 Motor D Welle" |
-| Wheeled gliders | Must fit the 13 mm VIDGA channel (see [rail measurements](#rail-measurements)) | 4 | IKEA / curtain-hardware shops |
-| Extension springs | "Zugfeder mit Ösen", wire 0.3–0.5 mm, Ø4–5 mm, 14–15 mm long | 4 | Gutekunst Federn, hardware-store assortment |
+| Wheeled gliders | Must fit the 13 mm VIDGA channel (see [rail measurements](#rail-measurements)) | 2 | IKEA / curtain-hardware shops |
+| Extension springs | "Zugfeder mit Ösen", wire 0.4–0.5 mm, Ø4–5 mm, 14–15 mm long | 2 | Gutekunst Federn, hardware-store assortment |
 | LEGO parts | See [`cad/README.md`](../cad/README.md) | – | Own collection, BrickLink, LEGO Pick a Brick |
 | Zip ties | 2.5 × 100 mm | ~15 | – |
 | Double-sided foam tape | ~1 mm | – | – |

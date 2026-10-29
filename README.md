@@ -8,7 +8,7 @@ A battery-powered curtain robot for the **IKEA VIDGA 3-track ceiling rail**, bui
 
 ## How it works
 
-- **Grip:** four wheeled gliders run inside tracks 1 and 3. Springs pull them down and the LEGO frame up, so two rubber wheels press against the flat underside of the rail beside the middle slot.
+- **Grip:** two wheeled gliders run inside track 1 and track 3, one at each end of the carriage. Springs pull them down and the LEGO frame up, so two rubber wheels press against the flat underside of the rail beside the middle slot.
 - **Drive:** a double-shaft N20 worm motor sits centred under the middle slot, one wheel on each shaft. The worm gear holds the curtain when stopped.
 - **Control:** the Calliope's built-in motor driver, LED matrix (as light sensor) and radio.
 - **Charging:** a 2-pin magnetic pogo connector. Pin 1 is 5 V only when docked, so it both trickle-charges the NiMH batteries (diode + 33 Ω) and tells the Calliope it is home (10k/10k divider on P0).
@@ -35,7 +35,7 @@ A battery-powered curtain robot for the **IKEA VIDGA 3-track ceiling rail**, bui
 - **Motor force on 2×AAA:** the built-in driver passes the battery voltage (~2.4–2.8 V) to a 3 V motor. Heavy curtains may stall it. Options: a slower worm motor, Ø20 mm wheels, or 4×AA + an external DRV8833 driver ([troubleshooting](docs/troubleshooting.md)).
 - **Battery life:** the Calliope 1.3 can't deep-sleep (~15 mA), so 2×AAA last only 2–4 days off the dock. The dock tops them up while the curtain is open.
 - **Glider dimensions** in the CAD models are estimated from photos – measure yours.
-- Tested on a 3-track VIDGA rail. A 1-track rail has no outer tracks for the corner gliders.
+- Tested on a 3-track VIDGA rail. A 1-track rail has no outer tracks for the gliders.
 
 ## Safety
 
